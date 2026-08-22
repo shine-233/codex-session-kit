@@ -1,5 +1,19 @@
 # codex-session-kit
 
+> 会话与记忆套件
+
+[![ci](https://github.com/shine-233/codex-session-kit/actions/workflows/ci.yml/badge.svg)](codex-session-kit../../actions)
+
+## 当前状态
+
+✅ 本地 PASS（CI 复核中）
+
+## 能力明细
+
+rollout 容错读取、SQLite 镜像索引、MemoryStore、Claude Code 导入器
+
+---
+
 > 判⑦融合：dsh 帧式持久化之上的读取/迁移/记忆层。
 
 ## 吸收来源

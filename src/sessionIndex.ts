@@ -1,4 +1,4 @@
-// SQLite query mirror over session files (verdict-7 adoption), Node >=22.5 node:sqlite.
+﻿// SQLite query mirror over session files (verdict-7 adoption), Node >=22.5 node:sqlite.
 import { createRequire } from 'node:module';
 const req = createRequire(import.meta.url);
 import { readFileSync, readdirSync } from 'node:fs';
@@ -7,7 +7,7 @@ import { join } from 'node:path';
 export interface IndexedSession { id: string|null; file: string; cwd?: string|null; originator?: string|null }
 
 export class SessionIndex {
-  private db: DatabaseSync;
+  private db: any;
   constructor(dbPath: string) {
     this.db = new DatabaseSync(dbPath);
     this.db.exec(`CREATE TABLE IF NOT EXISTS sessions(
@@ -50,3 +50,4 @@ export class SessionIndex {
     return (this.db.prepare('SELECT COUNT(*) c FROM sessions').all() as any[])[0]?.c ?? 0;
   }
 }
+
