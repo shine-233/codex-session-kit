@@ -37,3 +37,21 @@ describe('MemoryStore', () => {
     rmSync(dir,{recursive:true,force:true});
   });
 });
+
+describe('SessionIndex (node:sqlite mirror)', () => {
+  it('rebuilds and searches', async () => {
+    let DatabaseSync: any;
+    try { ({ DatabaseSync } = await import('node:sqlite')); }
+    catch { console.warn('node:sqlite unavailable; skipping'); return; }
+    const { SessionIndex } = await import('../src/sessionIndex.js');
+    const dir = mkdtempSync(join(tmpdir(),'si-'));
+    writeFileSync(join(dir,'a.jsonl'), JSON.stringify({type:'session_header',payload:{id:'sess_A',cwd:'C:/work'}})+'\n');
+    writeFileSync(join(dir,'b.jsonl'), JSON.stringify({type:'session_header',payload:{id:'sess_B',cwd:'D:/x'}})+'\n');
+    const dbFile = join(dir,'index.db');
+    const ix = new SessionIndex(dbFile);
+    expect(ix.rebuildFrom(dir)).toBe(2);
+    expect(ix.count()).toBe(2);
+    expect(ix.search('sess_A')[0].cwd).toBe('C:/work');
+    rmSync(dir,{recursive:true,force:true});
+  });
+});

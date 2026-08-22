@@ -71,3 +71,6 @@ export class MemoryStore {
   delete(key: string): void { this.log({op:'del',key,ts:Date.now()}); this.state.delete(key); }
   keys(): string[] { return [...this.state.keys()]; }
 }
+export { SessionIndex, type IndexedSession } from './sessionIndex.js';
+export { SessionIndex, type IndexedSession } from './sessionIndex.js';
+export { SessionIndex, type IndexedSession } from './sessionIndex.js';
