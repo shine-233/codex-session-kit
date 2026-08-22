@@ -38,10 +38,11 @@ export class SessionIndex {
   }
 
   search(q: string): IndexedSession[] {
-    return this.db.prepare(
+    const rows = this.db.prepare(
       `SELECT id,file,cwd,originator FROM sessions
        WHERE id LIKE ? OR file LIKE ? OR IFNULL(cwd,'') LIKE ? ORDER BY file`
-    ).all('%'+q+'%','%'+q+'%','%'+q+'%') as IndexedSession[];
+    ).all('%'+q+'%','%'+q+'%','%'+q+'%') as any[];
+    return rows.map((r)=>({ id:r.id??null, file:r.file, cwd:r.cwd??null, originator:r.originator??null }));
   }
 
   count(): number {
