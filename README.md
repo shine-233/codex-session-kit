@@ -26,3 +26,8 @@ MemoryStore.get/set/query(...)
 
 ## 上游同步
 基于 openai/codex@970b7f2ff4f6（Apache-2.0）。季度 diff 由 dsh-codex-ledger CI 触发，见 ledger/coverage.yaml 对应行。
+
+## M3 状态（已落地）
+- ✅ rollout 容错读取器（坏行计数、header 捕获、toDshEvents 归一）
+- ✅ MemoryStore 追加式记忆存储（重开重建、可删除）
+- ⏳ TODO：SQLite 镜像查询面、trace 回放、外部 agent 导入映射表
