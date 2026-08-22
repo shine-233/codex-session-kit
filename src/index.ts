@@ -72,6 +72,4 @@ export class MemoryStore {
   keys(): string[] { return [...this.state.keys()]; }
 }
 export { SessionIndex, type IndexedSession } from './sessionIndex.js';
-export { SessionIndex, type IndexedSession } from './sessionIndex.js';
-export { SessionIndex, type IndexedSession } from './sessionIndex.js';
 export * from './claudeCode.js';
