@@ -55,3 +55,27 @@ describe('SessionIndex (node:sqlite mirror)', () => {
     rmSync(dir,{recursive:true,force:true});
   });
 });
+
+describe('claude-code importer', () => {
+  it('parses mixed content lines and skips junk', async () => {
+    const { mkdtempSync, writeFileSync, rmSync } = await import('node:fs');
+    const { tmpdir } = await import('node:os');
+    const { join } = await import('node:path');
+    const dir = mkdtempSync(join(tmpdir(),'cc-'));
+    const file = join(dir,'s.jsonl');
+    writeFileSync(file, [
+      JSON.stringify({type:'user',timestamp:'2026-08-22T10:00:00Z',message:{role:'user',content:'fix the bug'}}),
+      JSON.stringify({type:'assistant',message:{role:'assistant',content:[{type:'text',text:'on it'}]}}),
+      '{broken',
+      JSON.stringify({type:'system'}),
+    ].join('\n'));
+    const { parseClaudeSession, claudeToDshEvents } = await import('../src/index');
+    const r = parseClaudeSession(file);
+    expect(r.turns.length).toBe(2);
+    expect(r.skipped).toBe(2);
+    const ev = claudeToDshEvents(r.turns);
+    expect(ev[0].type).toBe('user_message');
+    expect(ev[1].payload.source).toBe('claude-code');
+    rmSync(dir,{recursive:true,force:true});
+  });
+});

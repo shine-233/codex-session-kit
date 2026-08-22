@@ -30,4 +30,7 @@ MemoryStore.get/set/query(...)
 ## M3 状态（已落地）
 - ✅ rollout 容错读取器（坏行计数、header 捕获、toDshEvents 归一）
 - ✅ MemoryStore 追加式记忆存储（重开重建、可删除）
-- ⏳ TODO：SQLite 镜像查询面、trace 回放、外部 agent 导入映射表
+（已完成）、trace 回放、外部 agent 导入映射表
+
+## 追加交付
+- ✅ **Claude Code 会话导入器**：listProjects/listSessions/parseClaudeSession/claudeToDshEvents——本机 ~/.claude/projects 即数据源

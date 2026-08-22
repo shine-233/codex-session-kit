@@ -74,3 +74,4 @@ export class MemoryStore {
 export { SessionIndex, type IndexedSession } from './sessionIndex.js';
 export { SessionIndex, type IndexedSession } from './sessionIndex.js';
 export { SessionIndex, type IndexedSession } from './sessionIndex.js';
+export * from './claudeCode.js';
