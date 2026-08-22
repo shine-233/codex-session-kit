@@ -1,5 +1,6 @@
 // SQLite query mirror over session files (verdict-7 adoption), Node >=22.5 node:sqlite.
-import { DatabaseSync } from 'node:sqlite';
+import { createRequire } from 'node:module';
+const req = createRequire(import.meta.url);
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
