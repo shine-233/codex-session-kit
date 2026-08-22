@@ -9,6 +9,7 @@ export interface IndexedSession { id: string|null; file: string; cwd?: string|nu
 export class SessionIndex {
   private db: any;
   constructor(dbPath: string) {
+    const { DatabaseSync } = req('node:sqlite');
     this.db = new DatabaseSync(dbPath);
     this.db.exec(`CREATE TABLE IF NOT EXISTS sessions(
       id TEXT PRIMARY KEY, file TEXT UNIQUE, cwd TEXT, originator TEXT, size_bytes INTEGER)` );
